@@ -1,0 +1,30 @@
+body{
+    padding: 50px;
+    font-family: Arial, serif;
+    background-color: black;
+    text-align: center;
+    color: lightgray;
+}
+
+header{
+    display: flex;
+    align-items: baseline;
+}
+
+nav{
+    padding-left: 570px;
+}
+
+nav>ol>li{
+    display: inline;
+    text-align: right;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+nav>ol>li>a {
+    text-align: right;
+    text-decoration: none;
+    color: lightgray;
+    padding: 4px;
+}
