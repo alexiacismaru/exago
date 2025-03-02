@@ -1,0 +1,71 @@
+// to allow variables as parameter for the _delay-functions (must be placed before the include of delay.h)
+#define __DELAY_BACKWARD_COMPATIBLE__  
+#include <avr/io.h>
+#include <usart.h> 
+#include <utils.h> 
+
+#define NUMBER_OF_LEDS 4
+int analogPin = NUMBER_OF_LEDS; // potentiometer connected to the pins
+int val = 0; // variable to store the read value
+int lednumber;
+int percentage;
+int duration;
+
+void enableLed (lednumber)
+{
+    if ( lednumber < 0 || lednumber > NUMBER_OF_LEDS-1 ) return;
+    DDRB |= ( 1 << ( PB2 + lednumber ));
+}
+
+void lightUpLed (lednumber )
+{
+    if ( lednumber < 0 || lednumber > NUMBER_OF_LEDS-1 ) return;
+    PORTB &= ~( 1 << ( PB2 + lednumber ));
+}
+
+void lightDownLed (lednumber)
+{
+    if ( lednumber < 0 || lednumber > 3 ) return;
+    PORTB |= ( 1 << ( PB2 + lednumber ));
+}
+
+void dimLed(lednumber, percentage, duration){
+    analogRead(lednumber, percentage);
+    duration = 5000;
+}
+
+void fadeInLed(lednumber, duration){
+    if(percentage = 0){
+        DDRB |= (1 << (PB2 + 3));
+        percentage = 100;
+        duration = 1000;
+        _delay_ms(duration);
+    }
+}
+
+void fadeOutLed(lednumber, duration){
+    if(percentage = 100){
+        DDRB |= (1 << (PB2 + 3));
+        percentage = 0;
+        duration = 1000;
+        _delay_ms(duration);
+    }
+}
+
+int main()
+{
+    while (1)
+    {
+        for(){
+        val = analogRead(analogPin);  // read the input pin
+        analogWrite(lednumber, percentage);         
+        _delay_ms(duration);   
+    }
+
+        for(percentage = 100; percentage >= 0; percentage--){
+            val = analogRead(analogPin);  // read the input pin
+        analogWrite(lednumber, percentage);         
+        _delay_ms(duration);  
+        }
+    }
+}
